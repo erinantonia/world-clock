@@ -28,17 +28,22 @@ function updateTimeSydney() {
 updateTimeSydney();
 setInterval(updateTimeSydney, 1000);
 
-function updateTimeRio() {
-  let rioElement = document.querySelector("#rio");
-  let rioDateElement = rioElement.querySelector(".date");
-  let rioTimeElement = rioElement.querySelector(".time");
-  let rioTime = moment().tz("Brazil/East");
-
-  rioDateElement.innerHTML = rioTime.format("MMMM Do YYYY");
-  rioTimeElement.innerHTML = `${rioTime.format(
-    "h:mm:ss [<small>]A[</small>]"
-  )}`;
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
+  let citiesElement = document.querySelector("#cities");
+  citiesElement.innerHTML = `
+  <div class="city">
+        <div>
+          <h2>${cityName}</h2>
+          <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+        </div>
+        <div class="time">${cityTime.format("h:mm:ss")}<small>${cityTime.format(
+    "A"
+  )}</small></div>
+      </div>`;
 }
 
-updateTimeRio();
-setInterval(updateTimeRio, 1000);
+let citySelect = document.querySelector("#city");
+citySelect.addEventListener("change", updateCity);
