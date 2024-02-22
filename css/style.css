@@ -5,6 +5,7 @@ body {
     rgb(229, 248, 250) 90%
   );
   font-family: sans-serif;
+  min-height: 100vh;
 }
 
 h1 {
